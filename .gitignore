@@ -16,7 +16,7 @@
 .idea/
 out/
 target/
-*.xml
+
 
 # Package Files #
 *.jar
