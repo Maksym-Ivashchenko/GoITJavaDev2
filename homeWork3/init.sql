@@ -5,7 +5,7 @@ CREATE TABLE companies(
 	company VARCHAR(45) NOT NULL,
 	companies_city VARCHAR(45) NOT NULL,
 	companies_email VARCHAR(45) NOT NULL,
-    companies_projects_id INT NOT NULL,
+    companies_projects_id INT,
 	CONSTRAINT companies PRIMARY KEY(companies_id)
 );
 
@@ -14,7 +14,7 @@ CREATE TABLE customers(
 	customer_name VARCHAR(45) NOT NULL,
 	customer_country VARCHAR(45) NOT NULL,
 	customer_email VARCHAR(45) NOT NULL,
-    customers_projects_id INT NOT NULL,
+    customers_projects_id INT,
 	CONSTRAINT customers PRIMARY KEY(customers_id)
 );
 
@@ -24,8 +24,8 @@ CREATE TABLE developers(
 	developers_surname VARCHAR(45) NOT NULL,
 	developers_email VARCHAR(45) NOT NULL,
     developers_gender VARCHAR(45) NOT NULL,
-    developers_skills_id INT NOT NULL,
-    developers_projects_id INT NOT NULL,
+    developers_skills_id INT,
+    developers_projects_id INT,
 	CONSTRAINT developers PRIMARY KEY(developers_id)
 );
 
@@ -34,7 +34,7 @@ CREATE TABLE projects(
 	projects_name VARCHAR(45) NOT NULL,
 	projects_type VARCHAR(45) NOT NULL,
 	projects_coments VARCHAR(45) NOT NULL,
-    projects_developers_id INT NOT NULL,
+    projects_developers_id INT,
 	CONSTRAINT projects PRIMARY KEY(projects_id)
 );
 
