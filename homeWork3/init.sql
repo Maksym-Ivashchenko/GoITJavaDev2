@@ -1,67 +1,75 @@
-CREATE DATABASE home_work_3_1;
+DROP DATABASE IF EXISTS home_work_3_1;
+CREATE DATABASE IF NOT EXISTS home_work_3_1;
+USE home_work_3_1;
 
 CREATE TABLE companies(
-	companies_id INT NOT NULL AUTO_INCREMENT,
-	company VARCHAR(45) NOT NULL,
-	companies_city VARCHAR(45) NOT NULL,
-	companies_email VARCHAR(45) NOT NULL,
-    companies_projects_id INT,
-	CONSTRAINT companies PRIMARY KEY(companies_id)
+	id INT NOT NULL AUTO_INCREMENT,
+	company_name VARCHAR(45) NOT NULL,
+	city VARCHAR(45) NOT NULL,
+	email VARCHAR(45) NOT NULL,
+	CONSTRAINT companies PRIMARY KEY(id)
 );
 
 CREATE TABLE customers(
-	customers_id INT NOT NULL AUTO_INCREMENT,
+	id INT NOT NULL AUTO_INCREMENT,
 	customer_name VARCHAR(45) NOT NULL,
-	customer_country VARCHAR(45) NOT NULL,
-	customer_email VARCHAR(45) NOT NULL,
-    customers_projects_id INT,
-	CONSTRAINT customers PRIMARY KEY(customers_id)
+	country VARCHAR(45) NOT NULL,
+	email VARCHAR(45) NOT NULL,
+	CONSTRAINT customers PRIMARY KEY(id)
 );
 
 CREATE TABLE developers(
-	developers_id INT NOT NULL AUTO_INCREMENT,
-	developers_name VARCHAR(45) NOT NULL,
-	developers_surname VARCHAR(45) NOT NULL,
-	developers_email VARCHAR(45) NOT NULL,
-    developers_gender VARCHAR(45) NOT NULL,
-    developers_skills_id INT,
-    developers_projects_id INT,
-	CONSTRAINT developers PRIMARY KEY(developers_id)
+	id INT NOT NULL AUTO_INCREMENT,
+	first_name VARCHAR(45) NOT NULL,
+	last_name VARCHAR(45) NOT NULL,
+	email VARCHAR(45) NOT NULL,
+    gender VARCHAR(45) NOT NULL,
+	CONSTRAINT developers PRIMARY KEY(id)
 );
 
 CREATE TABLE projects(
-	projects_id INT NOT NULL AUTO_INCREMENT,
-	projects_name VARCHAR(45) NOT NULL,
-	projects_type VARCHAR(45) NOT NULL,
-	projects_coments VARCHAR(45) NOT NULL,
-    projects_developers_id INT,
-	CONSTRAINT projects PRIMARY KEY(projects_id)
+	id INT NOT NULL AUTO_INCREMENT,
+	project_name VARCHAR(45) NOT NULL,
+	project_type VARCHAR(45) NOT NULL,
+	coments VARCHAR(45) NOT NULL,
+	CONSTRAINT projects PRIMARY KEY(id)
 );
 
 CREATE TABLE skills(
-	skills_id INT NOT NULL AUTO_INCREMENT,
-	skill_1 VARCHAR(45) NOT NULL,
-	skill_2 VARCHAR(45) NOT NULL,
-	skill_3 VARCHAR(45) NOT NULL,
-	CONSTRAINT skills PRIMARY KEY(skills_id)
+	id INT NOT NULL AUTO_INCREMENT,
+	branch VARCHAR(45) NOT NULL,
+	skill_level VARCHAR(45) NOT NULL,
+	CONSTRAINT skills PRIMARY KEY(id)
 );
 
-ALTER TABLE companies ADD
-	FOREIGN KEY (companies_projects_id) 
-    REFERENCES projects (projects_id);
+CREATE TABLE companies_projects(
+	companies_id INT NOT NULL,
+    projects_id INT NOT NULL,
+	PRIMARY KEY(companies_id, projects_id),
+    FOREIGN KEY (companies_id) REFERENCES companies (id),
+    FOREIGN KEY (projects_id) REFERENCES projects (id)
+);
 
-ALTER TABLE customers ADD
-	FOREIGN KEY (customers_projects_id)
-	REFERENCES projects (projects_id);
+CREATE TABLE customers_projects(
+	customers_id INT NOT NULL,
+    projects_id INT NOT NULL,
+	PRIMARY KEY(customers_id, projects_id),
+    FOREIGN KEY (customers_id) REFERENCES customers (id),
+    FOREIGN KEY (projects_id) REFERENCES projects (id)
+);
 
-ALTER TABLE projects ADD
-	FOREIGN KEY (projects_developers_id)
-	REFERENCES developers (developers_id);
+CREATE TABLE developers_skills(
+	developers_id INT NOT NULL,
+    skills_id INT NOT NULL,
+	PRIMARY KEY(developers_id, skills_id),
+    FOREIGN KEY (developers_id) REFERENCES developers (id),
+    FOREIGN KEY (skills_id) REFERENCES skills (id)
+);
 
-ALTER TABLE developers ADD
-	FOREIGN KEY (developers_skills_id)
-	REFERENCES skills (skills_id);
-
-ALTER TABLE developers ADD	
-	FOREIGN KEY (developers_projects_id)	
-	REFERENCES projects (projects_id);
+CREATE TABLE developers_projects(
+	developers_id INT NOT NULL,
+    projects_id INT NOT NULL,
+	PRIMARY KEY(developers_id, projects_id),
+    FOREIGN KEY (developers_id) REFERENCES developers (id),
+    FOREIGN KEY (projects_id) REFERENCES projects (id)
+);
