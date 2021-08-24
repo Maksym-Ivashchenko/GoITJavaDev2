@@ -1,3 +1,3 @@
 USE home_work_3_1;
 
-SELECT MIN(projects_cost) FROM projects;
+SELECT MIN(cost) FROM projects;
