@@ -2,74 +2,70 @@ DROP DATABASE IF EXISTS home_work_3_1;
 CREATE DATABASE IF NOT EXISTS home_work_3_1;
 USE home_work_3_1;
 
-CREATE TABLE companies(
+CREATE TABLE company(
 	id INT NOT NULL AUTO_INCREMENT,
 	company_name VARCHAR(45) NOT NULL,
 	city VARCHAR(45) NOT NULL,
 	email VARCHAR(45) NOT NULL,
-	CONSTRAINT companies PRIMARY KEY(id)
+	CONSTRAINT company PRIMARY KEY(id)
 );
 
-CREATE TABLE customers(
+CREATE TABLE customer(
 	id INT NOT NULL AUTO_INCREMENT,
 	customer_name VARCHAR(45) NOT NULL,
 	country VARCHAR(45) NOT NULL,
 	email VARCHAR(45) NOT NULL,
-	CONSTRAINT customers PRIMARY KEY(id)
+	CONSTRAINT customer PRIMARY KEY(id)
 );
 
-CREATE TABLE developers(
+CREATE TABLE developer(
 	id INT NOT NULL AUTO_INCREMENT,
 	first_name VARCHAR(45) NOT NULL,
 	last_name VARCHAR(45) NOT NULL,
 	email VARCHAR(45) NOT NULL,
     gender VARCHAR(45) NOT NULL,
-	CONSTRAINT developers PRIMARY KEY(id)
+	CONSTRAINT developer PRIMARY KEY(id)
 );
 
-CREATE TABLE projects(
+CREATE TABLE project(
 	id INT NOT NULL AUTO_INCREMENT,
 	project_name VARCHAR(45) NOT NULL,
 	project_type VARCHAR(45) NOT NULL,
 	coments VARCHAR(45) NOT NULL,
-	CONSTRAINT projects PRIMARY KEY(id)
+	CONSTRAINT project PRIMARY KEY(id)
 );
 
-CREATE TABLE skills(
+CREATE TABLE skill(
 	id INT NOT NULL AUTO_INCREMENT,
 	branch VARCHAR(45) NOT NULL,
 	skill_level VARCHAR(45) NOT NULL,
-	CONSTRAINT skills PRIMARY KEY(id)
+	CONSTRAINT skill PRIMARY KEY(id)
 );
 
-CREATE TABLE companies_projects(
-	companies_id INT NOT NULL,
-    projects_id INT NOT NULL,
-	PRIMARY KEY(companies_id, projects_id),
-    FOREIGN KEY (companies_id) REFERENCES companies (id),
-    FOREIGN KEY (projects_id) REFERENCES projects (id)
+CREATE TABLE company_project(
+	company_id INT NOT NULL,
+    project_id INT NOT NULL,
+    FOREIGN KEY (company_id) REFERENCES company (id),
+    FOREIGN KEY (project_id) REFERENCES project (id)
 );
 
-CREATE TABLE customers_projects(
-	customers_id INT NOT NULL,
-    projects_id INT NOT NULL,
-	PRIMARY KEY(customers_id, projects_id),
-    FOREIGN KEY (customers_id) REFERENCES customers (id),
-    FOREIGN KEY (projects_id) REFERENCES projects (id)
+CREATE TABLE customer_project(
+	customer_id INT NOT NULL,
+    project_id INT NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES customer (id),
+    FOREIGN KEY (project_id) REFERENCES project (id)
 );
 
-CREATE TABLE developers_skills(
-	developers_id INT NOT NULL,
-    skills_id INT NOT NULL,
-	PRIMARY KEY(developers_id, skills_id),
-    FOREIGN KEY (developers_id) REFERENCES developers (id),
-    FOREIGN KEY (skills_id) REFERENCES skills (id)
+CREATE TABLE developer_skill(
+	developer_id INT NOT NULL,
+    skill_id INT NOT NULL,
+    FOREIGN KEY (developer_id) REFERENCES developer (id),
+    FOREIGN KEY (skill_id) REFERENCES skill (id)
 );
 
-CREATE TABLE developers_projects(
-	developers_id INT NOT NULL,
-    projects_id INT NOT NULL,
-	PRIMARY KEY(developers_id, projects_id),
-    FOREIGN KEY (developers_id) REFERENCES developers (id),
-    FOREIGN KEY (projects_id) REFERENCES projects (id)
+CREATE TABLE developer_project(
+	developer_id INT NOT NULL,
+    project_id INT NOT NULL,
+    FOREIGN KEY (developer_id) REFERENCES developer (id),
+    FOREIGN KEY (project_id) REFERENCES project (id)
 );
