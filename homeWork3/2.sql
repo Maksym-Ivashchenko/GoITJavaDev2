@@ -1,4 +1,8 @@
 USE home_work_3_1;
 
-SELECT project_name FROM projects INNER JOIN developers
-	WHERE salary=(SELECT MAX(salary) FROM developers);
+SELECT project_name, SUM(salary) AS sum_salary
+ FROM developer INNER JOIN developer_project
+ ON developer_project.developer_id = developer.id
+ INNER JOIN project
+ ON developer_project.project_id = project.id
+ GROUP BY project_name ORDER BY sum_salary DESC LIMIT 1;
